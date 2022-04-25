@@ -3,6 +3,7 @@ from sklearn.linear_model import LinearRegression
 import statsmodels.api as sm
 from scipy.linalg import lstsq
 
+
 def generate_data(m, w):
     d = w.shape[0]-1
     x = np.random.uniform(-10, 10, (m, d+1))
