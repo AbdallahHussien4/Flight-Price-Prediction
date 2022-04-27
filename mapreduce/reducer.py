@@ -3,13 +3,16 @@ import pickle
 import numpy as np
 from io import StringIO
 
-
-for line in sys.stdin:
-    #print(line)
+def read_line(line):
     key, value = line.split('\t')
     value = value.replace('$', '\n')
     data = np.genfromtxt(StringIO(value), delimiter=",")
-    print(key, data)
+    #print(key, data)
+    return key, data
+
+for line in sys.stdin:
+    #print(line)
+    key, value = read_line(line)
 
 
 # for line in sys.stdin:
