@@ -3,17 +3,14 @@ import sys
 import numpy as np
 import pickle
 
+def emit(key, value):
+    sys.stdout.write(f"{key}\t")
+    np.savetxt(sys.stdout, value, delimiter=",", newline="$")
+    sys.stdout.write("\n")
 
-data = np.genfromtxt(sys.stdin.readlines(), delimiter=",")
-#data = np.zeros((1,2))
+input_split = np.genfromtxt(sys.stdin.readlines(), delimiter=",")
 
-#qr = np.linalg.qr(data)
-#serialized = pickle.dumps(data)
+q, r = np.linalg.qr(input_split)
 
-#sys.stdout.buffer.write(b'K\t')
-#sys.stdout.buffer.write(len(serialized).to_bytes(1, byteorder='big'))\
-#print(f'K\t', sep='', end='')
+emit("Q", q)
 
-sys.stdout.write("R\t")
-np.savetxt(sys.stdout, data, delimiter=",", newline="$")
-sys.stdout.write("\n")
