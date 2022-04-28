@@ -1,37 +1,41 @@
 import sys
-import pickle
 import numpy as np
 from io import StringIO
+import re
+
 
 def read_line(line):
-    key, value = line.split('\t')
-    value = value.replace('$', '\n')
-    data = np.genfromtxt(StringIO(value), delimiter=",")
-    #print(key, data)
-    return key, data
+    #print(line)
+    key, Q, R, Y = re.split("\t|R|Y", line)
+    #key, value = line.split('\t')
+    Q = Q.replace('$', '\n')
+    R = R.replace('$', '\n')
+    Y = Y.replace('$', '\n')
+    Q = np.genfromtxt(StringIO(Q), delimiter=",")
+    R = np.genfromtxt(StringIO(R), delimiter=",")
+    Y = np.genfromtxt(StringIO(Y), delimiter=",")
+    return key, Q, R, Y
+
+q1 = []
+r1 = []
+y_list = []
 
 for line in sys.stdin:
-    #print(line)
-    key, value = read_line(line)
+    key, q, r, y = read_line(line)
+    q1.append(q)
+    r1.append(r)
+    y_list.append(y)
 
+m = len(q1)
 
-# for line in sys.stdin:
-#     key, value = sys.stdin.readline().split('\t')
-#     s = StringIO(sys.stdin.read())
-#     data = np.loadtxt(sys.stdin, delimiter=",")
-#     data = pickle.loads(line)
-# print(data)
-    
+r_tmp = np.vstack(r1)
+q2, r2 = np.linalg.qr(r_tmp)
+q2 = np.split(q2, m)
 
-    # # reading key
-    # key = sys.stdin.buffer.read(1).decode()
-    # # reading tab separator
-    # sys.stdin.buffer.read(1)
-    # # reading value
-    # value = sys.stdin.buffer.read()
+q3 = [q1[i].dot(q2[i]) for i in range(m)]
 
-    # #data = pickle.loads(value)
+v = [q3[i].T.dot(y_list[i]) for i in range(m)]
 
-    #print(key)
-#except Exception as e:
-#    print(e)
+coef = np.linalg.inv(r2).dot(np.sum(v, axis=0))
+
+print("parallel QR", coef)

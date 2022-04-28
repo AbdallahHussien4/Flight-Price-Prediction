@@ -1,7 +1,7 @@
 import numpy as np
-from sklearn.linear_model import LinearRegression
-import statsmodels.api as sm
-from scipy.linalg import lstsq
+#from sklearn.linear_model import LinearRegression
+#import statsmodels.api as sm
+#from scipy.linalg import lstsq
 
 
 def generate_data(m, w):
@@ -20,22 +20,22 @@ def read_data(filename):
     return x, y
 
 w = np.array([1, 2, 3])
-X, y = generate_data(1000, w)
+X, y = generate_data(100000, w)
 #X, y = read_data('input.csv')
 print(X.shape)
 print(X.dtype)
-reg = LinearRegression().fit(X, y)
-#print(reg.score(X, y))
-print("sklearn",reg.coef_)
-#print(reg.intercept_)
+# reg = LinearRegression().fit(X, y)
+# #print(reg.score(X, y))
+# print("sklearn",reg.coef_)
+# #print(reg.intercept_)
 
-# using OLS
-ols = sm.OLS(y, X).fit()
-print("OLS", ols.params)
+# # using OLS
+# ols = sm.OLS(y, X).fit()
+# print("OLS", ols.params)
 
-# using lstsq
-w_lstsq = lstsq(X, y)[0]
-print("scipy", w_lstsq)
+# # using lstsq
+# w_lstsq = lstsq(X, y)[0]
+# print("scipy", w_lstsq)
 
 # using QR decomposition
 Q, R = np.linalg.qr(X)
