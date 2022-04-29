@@ -3,11 +3,9 @@ import numpy as np
 from io import StringIO
 import re
 
-
+# Reads the numpy arrays from stdin key value pair.
 def read_line(line):
-    #print(line)
     key, Q, R, Y = re.split("\t|R|Y", line)
-    #key, value = line.split('\t')
     Q = Q.replace('$', '\n')
     R = R.replace('$', '\n')
     Y = Y.replace('$', '\n')
@@ -16,26 +14,27 @@ def read_line(line):
     Y = np.genfromtxt(StringIO(Y), delimiter=",")
     return key, Q, R, Y
 
-q1 = []
-r1 = []
-y_list = []
+
+Q1 = []
+R1 = []
+Y = []
 
 for line in sys.stdin:
     key, q, r, y = read_line(line)
-    q1.append(q)
-    r1.append(r)
-    y_list.append(y)
+    Q1.append(q)
+    R1.append(r)
+    Y.append(y)
 
-m = len(q1)
+m = len(Q1)
 
-r_tmp = np.vstack(r1)
-q2, r2 = np.linalg.qr(r_tmp)
-q2 = np.split(q2, m)
+R_tmp = np.vstack(R1)
+Q2, R2 = np.linalg.qr(R_tmp)
+Q2 = np.split(Q2, m)
 
-q3 = [q1[i].dot(q2[i]) for i in range(m)]
+Q3 = [Q1[i].dot(Q2[i]) for i in range(m)]
 
-v = [q3[i].T.dot(y_list[i]) for i in range(m)]
+V = [Q3[i].T.dot(Y[i]) for i in range(m)]
 
-coef = np.linalg.inv(r2).dot(np.sum(v, axis=0))
+beta = np.linalg.inv(R2).dot(np.sum(V, axis=0))
 
-print("parallel QR", coef)
+print("Model coefficients: ", beta)
