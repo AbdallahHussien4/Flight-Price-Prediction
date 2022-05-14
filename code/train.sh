@@ -10,7 +10,7 @@ $HADOOP_HOME/bin/hdfs dfs -mkdir /flight-price-prediction/Input
 $HADOOP_HOME/bin/hdfs dfs -rm /flight-price-prediction/Input/*
 $HADOOP_HOME/bin/hdfs dfs -rm -r /flight-price-prediction/Output
 
-$HADOOP_HOME/bin/hdfs dfs -put -f ../data/preprocessed_data.csv /flight-price-prediction/Input
+$HADOOP_HOME/bin/hdfs dfs -put -f ../data/preprocessed_train_data.csv /flight-price-prediction/Input
 
 $HADOOP_HOME/bin/hadoop jar $HADOOP_STREAMING \
 -file ./mapper.py -mapper "${CONDA_PYTHON} mapper.py" \
