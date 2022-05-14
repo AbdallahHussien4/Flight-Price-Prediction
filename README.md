@@ -5,12 +5,8 @@ This is a Machine Learning and Big Data Project to analyse the flight booking da
 [Flight Price Prediction](https://www.kaggle.com/datasets/shubhambathwal/flight-price-prediction)
 
 ## Prerequisites
-- Python
-- Jupyter Notebook
-- Pandas
-- Numpy
-- Sklearn
-- Seaborn
-- Matplotlib
 
+
+## Results
+You Can see the results and details in the pdf documentations found above.
 
