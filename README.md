@@ -8,9 +8,8 @@ This is a Machine Learning and Big Data Project to analyse the flight booking da
 - Linux
 - Hadoop
 - Anaconda/Miniconda
-- Python
-- Numpy
-- Jupyter Notebook
+- Python, Numpy and Jupyter Notebook (must be inside conda env)
+- Pandas, Sklearn, Matplotlib and Seaborn
 
 ## How to run
 - To explore the dataset open the notebook 
