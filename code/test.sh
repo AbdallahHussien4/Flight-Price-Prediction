@@ -10,12 +10,13 @@ $HADOOP_HOME/bin/hdfs dfs -mkdir /flight-price-prediction/Input
 $HADOOP_HOME/bin/hdfs dfs -rm /flight-price-prediction/Input/*
 $HADOOP_HOME/bin/hdfs dfs -rm -r /flight-price-prediction/Output
 
-$HADOOP_HOME/bin/hdfs dfs -put -f ../data/preprocessed_train_data.csv /flight-price-prediction/Input
+$HADOOP_HOME/bin/hdfs dfs -put -f ../data/preprocessed_test_data.csv /flight-price-prediction/Input
 
 $HADOOP_HOME/bin/hadoop jar $HADOOP_STREAMING \
--file ./mapper_train.py -mapper "${CONDA_PYTHON} mapper_train.py" \
--file ./reducer_train.py -reducer "${CONDA_PYTHON} reducer_train.py" \
+-file ./mapper_test.py -mapper "${CONDA_PYTHON} mapper_test.py" \
+-file ./reducer_test.py -reducer "${CONDA_PYTHON} reducer_test.py" \
+-file ./model.txt \
 -input /flight-price-prediction/Input -output /flight-price-prediction/Output
 
-rm ./model.txt
-$HADOOP_HOME/bin/hdfs dfs -get /flight-price-prediction/Output/part* ./model.txt
+rm ./score.txt
+$HADOOP_HOME/bin/hdfs dfs -get /flight-price-prediction/Output/part* ./score.txt
