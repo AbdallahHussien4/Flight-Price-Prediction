@@ -13,8 +13,4 @@ This is a Machine Learning and Big Data Project to analyse the flight booking da
 - Seaborn
 - Matplotlib
 
-## How To Run
-After installing all prerequisties packages just run all notebook's cells and see the output.
 
-## Results
-You Can see the results and details in the pdf documentation found above.
