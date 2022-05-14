@@ -37,4 +37,6 @@ V = [Q3[i].T.dot(Y[i]) for i in range(m)]
 
 beta = np.linalg.inv(R2).dot(np.sum(V, axis=0))
 
-print("Model coefficients: ", beta)
+print("Model coefficients: ")
+
+np.savetxt(sys.stdout, beta)
