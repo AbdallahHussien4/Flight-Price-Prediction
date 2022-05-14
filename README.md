@@ -1,2 +1,6 @@
 # Big-Data
-don't run
+
+## Prerequisites
+- Linux
+- Hadoop
+- Anaconda/Miniconda
