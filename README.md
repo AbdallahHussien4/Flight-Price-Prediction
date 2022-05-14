@@ -19,7 +19,7 @@ This is a Machine Learning and Big Data Project to analyse the flight booking da
   ```
   export HADOOP_HOME=~/Desktop/hadoop-3.3.2
   export HADOOP_STREAMING=$HADOOP_HOME/share/hadoop/tools/lib/hadoop-streaming-3.3.2.jar
-  export CONDA_PYTHON=/home/kareem/miniconda3/bin/python```
+  export CONDA_PYTHON=/home/kareem/miniconda3/bin/python
 - Make sure hadoop is running
 - To train the linear regression model on hadoop, run:  
   `cd code && ./train.sh`  
